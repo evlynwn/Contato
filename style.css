@@ -1,0 +1,36 @@
+body{
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgb(123, 177, 194);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+.input-container {
+    display: flex;       
+    gap: 10px;     
+    color: rgba(42, 126, 165, 0.836);      
+  }
+  
+.input-container input {
+    flex: 2;             
+    padding: 8px;
+  }
+
+button{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
