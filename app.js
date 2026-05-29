@@ -1,14 +1,69 @@
 'use strict'
 
-import { getContatos, getContato, postContato, putContato, deleteContato } from "./contatos.js"
+import {
+    getContatos,
+    postContato
+} from './contatos.js'
 
-const novoContato = {
-    "nome": "Evellyn Santiago Atualizado",
-    "celular": "11 9 7171-6464",
-    "foto": "https://img.freepik.com/psd-gratuitas/renderizacao-3d-do-estilo-de-cabelo-para-o-design-do-avatar_23-2151869121.jpg",
-    "email": "santiagoevellyn008@gmail.com",
-    "endereco": "Av. São Joaquim, 234",
-    "cidade": "Itapevi Atualizado"
+const tabela = document.getElementById('listaContatos')
+
+const nome = document.getElementById('nome')
+const celular = document.getElementById('celular')
+const email = document.getElementById('email')
+const endereco = document.getElementById('endereco')
+const cidade = document.getElementById('cidade')
+
+const botao = document.getElementById('salvar')
+
+async function carregarContatos(){
+
+    const contatos = await getContatos()
+
+    tabela.innerHTML = ''
+
+    contatos.forEach(contato => {
+
+        tabela.innerHTML += `
+        
+            <tr>
+
+                <td>${contato.id}</td>
+                <td>${contato.nome}</td>
+                <td>${contato.celular}</td>
+                <td>${contato.email}</td>
+                <td>${contato.endereco}</td>
+                <td>${contato.cidade}</td>
+
+            </tr>
+
+        `
+    })
 }
 
-console.table( await putContato(551, novoContato))
+async function salvarContato(){
+
+    const novoContato = {
+
+        nome: nome.value,
+        celular: celular.value,
+        email: email.value,
+        endereco: endereco.value,
+        cidade: cidade.value
+
+    }
+
+    await postContato(novoContato)
+
+    carregarContatos()
+
+    nome.value = ''
+    celular.value = ''
+    email.value = ''
+    endereco.value = ''
+    cidade.value = ''
+}
+
+botao.addEventListener('click', salvarContato)
+
+carregarContatos()
+
